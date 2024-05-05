@@ -1,3 +1,4 @@
+import 'package:fileeditor/features/FileManagment/widgets/RenameButton.dart';
 import 'package:flutter/material.dart';
 
 class OtherOptionsButton extends StatelessWidget {
@@ -20,17 +21,8 @@ class OtherOptionsButton extends StatelessWidget {
             position.dy + size.height + 100, // Adjust as needed
           ),
           items: [
-            PopupMenuItem(
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Row(
-                  children: [
-                    Icon(Icons.add),
-                    Spacer(),
-                    Text("Rename"),
-                  ],
-                ),
-              ),
+            const PopupMenuItem(
+              child: RenameButton(),
             ),
             PopupMenuItem(
               child: ElevatedButton(
@@ -50,3 +42,4 @@ class OtherOptionsButton extends StatelessWidget {
     );
   }
 }
+
