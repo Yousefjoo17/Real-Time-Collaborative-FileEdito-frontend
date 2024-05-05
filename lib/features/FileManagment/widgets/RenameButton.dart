@@ -4,10 +4,10 @@ class RenameButton extends StatefulWidget {
   const RenameButton({Key? key}) : super(key: key);
 
   @override
-  _RenameButtonState createState() => _RenameButtonState();
+  RenameButtonState createState() => RenameButtonState();
 }
 
-class _RenameButtonState extends State<RenameButton> {
+class RenameButtonState extends State<RenameButton> {
   bool isButtonVisible = true;
   late TextEditingController textController;
 
