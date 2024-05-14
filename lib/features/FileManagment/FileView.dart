@@ -1,5 +1,5 @@
-import 'package:fileeditor/core/AppRouter.dart';
-import 'package:fileeditor/core/services/AssetsData.dart';
+import 'package:fileeditor/core/utils/AppRouter.dart';
+import 'package:fileeditor/core/utils/AssetsData.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileEditingWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

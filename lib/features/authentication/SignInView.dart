@@ -1,7 +1,7 @@
-import 'package:fileeditor/core/AppRouter.dart';
+import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/core/helpers/CustomShowSnackBar.dart';
 import 'package:fileeditor/core/models/UserModel.dart';
-import 'package:fileeditor/core/services/AssetsData.dart';
+import 'package:fileeditor/core/utils/AssetsData.dart';
 import 'package:fileeditor/core/services/userService.dart';
 import 'package:fileeditor/core/widgets/Custom_button.dart';
 import 'package:fileeditor/core/widgets/Custom_text_field.dart';

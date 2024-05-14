@@ -1,4 +1,4 @@
-import 'package:fileeditor/core/AppRouter.dart';
+import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:flutter/material.dart';
 
 late String content;
