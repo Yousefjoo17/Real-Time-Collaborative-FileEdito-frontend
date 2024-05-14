@@ -1,3 +1,4 @@
+import 'package:fileeditor/core/models/FileModel.dart';
 import 'package:fileeditor/features/FileManagment/FileView.dart';
 import 'package:fileeditor/features/FileManagment/HomeView.dart';
 import 'package:fileeditor/features/FileManagment/cubit/files_management_cubit.dart';
@@ -28,7 +29,8 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kfileView,
-        builder: (context, state) => const FileView(),
+        builder: (context, state) =>
+            FileView(fileModel: state.extra as FileModel),
       ),
       GoRoute(
           path: khomeView,

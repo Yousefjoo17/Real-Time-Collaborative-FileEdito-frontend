@@ -1,3 +1,4 @@
+import 'package:fileeditor/core/models/FileModel.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/core/utils/AssetsData.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileEditingWidget.dart';
@@ -5,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class FileView extends StatefulWidget {
-  const FileView({super.key});
+  const FileView({super.key, required this.fileModel});
 
+ final FileModel fileModel;
   @override
   State<FileView> createState() => _FileViewState();
 }
@@ -62,6 +64,7 @@ class _FileViewState extends State<FileView> {
             FileEditingWidget(
               isBold: isBold,
               isUnderlined: isUnderlined,
+              fileModel: widget.fileModel,
             ),
           ],
         ),

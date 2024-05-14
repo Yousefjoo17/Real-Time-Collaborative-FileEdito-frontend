@@ -1,16 +1,17 @@
+import 'package:fileeditor/core/models/FileModel.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileActionsRow.dart';
-import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class FileIcon extends StatelessWidget {
-  const FileIcon({super.key});
+  const FileIcon({super.key, required this.fileModel});
+  final FileModel fileModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.kfileView);
+        GoRouter.of(context).push(AppRouter.kfileView, extra: fileModel);
       },
       child: Stack(
         clipBehavior: Clip.none,
@@ -51,7 +52,7 @@ class FileIcon extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: Text(
-                  content,
+                  fileModel.content ?? "",
                   style: const TextStyle(fontSize: 10),
                 ),
               ),

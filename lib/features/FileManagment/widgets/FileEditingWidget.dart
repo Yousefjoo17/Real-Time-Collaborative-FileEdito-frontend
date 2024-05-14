@@ -1,12 +1,14 @@
+import 'package:fileeditor/core/models/FileModel.dart';
 import 'package:fileeditor/features/FileManagment/methods/FindDiff.dart';
 import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
 
 class FileEditingWidget extends StatefulWidget {
   const FileEditingWidget(
-      {super.key, required this.isBold, required this.isUnderlined});
+      {super.key, required this.isBold, required this.isUnderlined, required this.fileModel});
   final bool isBold;
   final bool isUnderlined;
+  final FileModel fileModel;
 
   @override
   State<FileEditingWidget> createState() => _FileEditingWidgetState();
@@ -21,7 +23,7 @@ class _FileEditingWidgetState extends State<FileEditingWidget> {
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: content);
+    controller = TextEditingController(text: widget.fileModel.content);
     controller.addListener(onTextChanged);
   }
 
