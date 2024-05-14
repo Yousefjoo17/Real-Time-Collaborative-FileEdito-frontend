@@ -1,24 +1,28 @@
 import 'dart:core';
 
 class UserModel {
-  final String vendorId;
-  final String vendorName;
-  final String vendorAddress;
-  final String vendorPhoneNumber;
+   int? userID;
+   String? username;
+   String? password;
 
   UserModel({
-    required this.vendorId,
-    required this.vendorName,
-    required this.vendorAddress,
-    required this.vendorPhoneNumber,
+    this.userID,
+     this.username,
+     this.password,
   });
 
   factory UserModel.fromJson(json) {
     return UserModel(
-      vendorId: json["vendorId"],
-      vendorName: json["vendorName"],
-      vendorAddress: json["vendorAddress"],
-      vendorPhoneNumber: json["vendorPhoneNumber"],
+      userID: json["userID"],
+      username: json["username"],
+      password: json["password"],
     );
+  }
+
+   Map<String, dynamic> toJson() {
+    return {
+      "username": username,
+      "password": password,
+    };
   }
 }

@@ -2,16 +2,8 @@ import 'package:fileeditor/core/AppRouter.dart';
 import 'package:flutter/material.dart';
 
 late String content;
-void main() {
+void main() async {
   content = "";
-  /*
-  UserModel userModel;
-  userModel = await UserService().getFirstUserInfo();
-  print(userModel.vendorAddress);
-  print(userModel.vendorId);
-  print(userModel.vendorName);
-  print(userModel.vendorPhoneNumber);
-  */
   runApp(const MyApp());
 }
 

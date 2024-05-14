@@ -1,12 +1,22 @@
 import 'package:fileeditor/core/AppRouter.dart';
+import 'package:fileeditor/core/helpers/CustomShowSnackBar.dart';
+import 'package:fileeditor/core/models/UserModel.dart';
 import 'package:fileeditor/core/services/AssetsData.dart';
+import 'package:fileeditor/core/services/userService.dart';
 import 'package:fileeditor/core/widgets/Custom_button.dart';
 import 'package:fileeditor/core/widgets/Custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class SignUpView extends StatelessWidget {
+class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
+
+  @override
+  State<SignUpView> createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
+  UserModel userModel = UserModel();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,24 +41,33 @@ class SignUpView extends StatelessWidget {
                   ),
                   CustomTextField(
                     hinttext: "username",
-                    onchanged: (p0) {},
-                  ),
-                  const SizedBox(height: 12),
-                  CustomTextField(
-                    hinttext: "email",
-                    onchanged: (p0) {},
+                    onchanged: (p0) {
+                      userModel.username = p0;
+                    },
                   ),
                   const SizedBox(height: 12),
                   CustomTextField(
                     hinttext: "password",
                     obscureText: true,
-                    onchanged: (p0) {},
+                    onchanged: (p0) {
+                      userModel.password = p0;
+                    },
                   ),
                   const SizedBox(height: 20),
                   CustomButton(
                     text: "Sign Up",
-                    ontap: () {
-                      GoRouter.of(context).push(AppRouter.khomeView);
+                    ontap: () async {
+                      List<UserModel> users = await UserService().getAllUsers();
+                      bool found =
+                          UserService().isUsernameExists(users, userModel);
+                      if (found) {
+                        showmySnackBar(context, "user is already found");
+                      } else {
+                        await UserService().createUser(userModel);
+                        showmySnackBar(context,
+                            "regsiterd successdully ${userModel.username}");
+                        GoRouter.of(context).push(AppRouter.khomeView);
+                      }
                     },
                     color: Colors.purple,
                   ),
