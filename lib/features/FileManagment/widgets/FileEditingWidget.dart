@@ -1,11 +1,15 @@
 import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/services/fileService.dart';
 import 'package:fileeditor/features/FileManagment/methods/FindDiff.dart';
 import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
 
 class FileEditingWidget extends StatefulWidget {
   const FileEditingWidget(
-      {super.key, required this.isBold, required this.isUnderlined, required this.fileModel});
+      {super.key,
+      required this.isBold,
+      required this.isUnderlined,
+      required this.fileModel});
   final bool isBold;
   final bool isUnderlined;
   final FileModel fileModel;
@@ -19,7 +23,7 @@ class _FileEditingWidgetState extends State<FileEditingWidget> {
   late int cursorPosition;
   String lastText = "";
   late String currentText;
-
+  FileService fileService = FileService();
   @override
   void initState() {
     super.initState();
@@ -46,19 +50,22 @@ class _FileEditingWidgetState extends State<FileEditingWidget> {
         fontWeight: widget.isBold ? FontWeight.bold : null,
         decoration: widget.isUnderlined ? TextDecoration.underline : null,
       ),
-      onChanged: (value) {
+      onChanged: (value) async {
         currentText = value;
-        content = value;
+        widget.fileModel.content = value;
         if (currentText.length > lastText.length) {
           //I inserted letters
           String diff =
               findDifference(shortText: lastText, longText: currentText);
-          print("inserted $diff position ${cursorPosition - diff.length}");
+          int pos = cursorPosition - diff.length;
+          FileService().runUser(widget.fileModel.fileID!,currUserModel.userID!, diff, pos);
+          print("inserted $diff position $pos");
         } else {
           // I deleted letter
           String diff =
               findDifference(shortText: currentText, longText: lastText);
-          print("deleted $diff position $cursorPosition");
+          int pos = cursorPosition;
+          print("deleted $diff position $pos");
         }
         lastText = value;
       },

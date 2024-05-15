@@ -5,6 +5,7 @@ import 'package:fileeditor/core/utils/AssetsData.dart';
 import 'package:fileeditor/core/services/userService.dart';
 import 'package:fileeditor/core/widgets/Custom_button.dart';
 import 'package:fileeditor/core/widgets/Custom_text_field.dart';
+import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -64,6 +65,9 @@ class _SignUpViewState extends State<SignUpView> {
                         showmySnackBar(context, "user is already found");
                       } else {
                         await UserService().createUser(userModel);
+
+                        currUserModel = userModel;
+                        currUserModel.userID = users.length + 1;
                         showmySnackBar(context,
                             "regsiterd successdully ${userModel.username}");
                         GoRouter.of(context).push(AppRouter.khomeView);

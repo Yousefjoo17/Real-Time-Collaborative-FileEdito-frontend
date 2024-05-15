@@ -1,9 +1,9 @@
+import 'package:fileeditor/core/models/UserModel.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:flutter/material.dart';
 
-late String content;
+late UserModel currUserModel;
 void main() async {
-  content = "";
   runApp(const MyApp());
 }
 

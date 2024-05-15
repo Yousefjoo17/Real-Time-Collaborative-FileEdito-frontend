@@ -1,4 +1,5 @@
 import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/services/fileService.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileActionsRow.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +8,13 @@ import 'package:go_router/go_router.dart';
 class FileIcon extends StatelessWidget {
   const FileIcon({super.key, required this.fileModel});
   final FileModel fileModel;
+
+  get fileService => null;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        await FileService().openFile(fileModel.fileID!);
         GoRouter.of(context).push(AppRouter.kfileView, extra: fileModel);
       },
       child: Stack(

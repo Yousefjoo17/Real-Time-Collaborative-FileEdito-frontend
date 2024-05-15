@@ -5,6 +5,7 @@ import 'package:fileeditor/core/utils/AssetsData.dart';
 import 'package:fileeditor/core/services/userService.dart';
 import 'package:fileeditor/core/widgets/Custom_button.dart';
 import 'package:fileeditor/core/widgets/Custom_text_field.dart';
+import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -61,11 +62,14 @@ class _SignInViewState extends State<SignInView> {
                       List<UserModel> users = await UserService().getAllUsers();
                       bool found = UserService().isUserExist(users, userModel);
                       if (found) {
+                        currUserModel = userModel;
+                        currUserModel.userID =
+                            UserService().getCurrUserID(users, userModel);
                         showmySnackBar(context, "welcome");
                         GoRouter.of(context).push(AppRouter.khomeView);
                       } else {
-                        showmySnackBar(context,
-                            "username or password is incorrect");
+                        showmySnackBar(
+                            context, "username or password is incorrect");
                       }
                     },
                     color: Colors.purple,
