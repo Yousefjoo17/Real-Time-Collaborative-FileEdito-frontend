@@ -1,6 +1,9 @@
 import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/models/UserFilePermission.dart';
+import 'package:fileeditor/core/services/UserFilePermissionService.dart';
 import 'package:fileeditor/core/services/fileService.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
+import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -71,7 +74,14 @@ class _PlusWidgetState extends State<PlusWidget> {
                   int id = await FileService().generateFileID();
                   FileModel fileModel =
                       FileModel(fileID: id, fileName: name, content: "");
-                  FileService().createFile(fileModel);
+                  await FileService().createFile(fileModel);
+                  UserFilePermission userFilePermission = UserFilePermission(
+                    fileId: id,
+                    userId: currUserModel.userID,
+                    permisson: 0,
+                  );
+                  await UserFilePermissionService()
+                      .createUserFilePermission(userFilePermission);
                   GoRouter.of(context)
                       .push(AppRouter.kfileView, extra: fileModel);
                 },

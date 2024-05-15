@@ -3,7 +3,7 @@ import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:flutter/material.dart';
 
 late UserModel currUserModel;
-void main() async {
+void main() {
   runApp(const MyApp());
 }
 

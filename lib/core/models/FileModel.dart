@@ -20,7 +20,6 @@ class FileModel {
   Map<String, dynamic> toJson() {
     return {
       "content": content,
-      "fileID": fileID,
       "fileName": fileName,
     };
   }
