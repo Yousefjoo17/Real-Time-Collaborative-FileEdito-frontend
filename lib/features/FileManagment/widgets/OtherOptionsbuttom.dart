@@ -1,8 +1,13 @@
+import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/services/fileService.dart';
+import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/features/FileManagment/widgets/RenameButton.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OtherOptionsButton extends StatelessWidget {
-  const OtherOptionsButton({super.key});
+  const OtherOptionsButton({super.key, required this.fileModel});
+  final FileModel fileModel;
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +26,16 @@ class OtherOptionsButton extends StatelessWidget {
             position.dy + size.height + 100, // Adjust as needed
           ),
           items: [
-            const PopupMenuItem(
-              child: RenameButton(),
+            PopupMenuItem(
+              child: RenameButton(fileModel: fileModel),
             ),
             PopupMenuItem(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  await FileService().deleteFile(fileModel.fileID!);
+                  GoRouter.of(context).pop();
+                  GoRouter.of(context).push(AppRouter.khomeView);
+                },
                 child: const Row(
                   children: [
                     Icon(Icons.remove_done_outlined),
@@ -42,4 +51,3 @@ class OtherOptionsButton extends StatelessWidget {
     );
   }
 }
-

@@ -31,16 +31,17 @@ class FileIcon extends StatelessWidget {
                 )
               ],
             ),
-            child: const Card(
-              color: Color.fromARGB(255, 183, 159, 185),
+            child: Card(
+              color: const Color.fromARGB(255, 183, 159, 185),
               elevation: 10,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FileActionsRow(),
+                    FileActionsRow(fileModel: fileModel),
                   ],
                 ),
               ),
@@ -55,9 +56,23 @@ class FileIcon extends StatelessWidget {
               height: 160,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(6),
-                child: Text(
-                  fileModel.content ?? "",
-                  style: const TextStyle(fontSize: 10),
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        fileModel.fileName!,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      fileModel.content ?? "",
+                      style: const TextStyle(fontSize: 10),
+                    ),
+                  ],
                 ),
               ),
             ),

@@ -34,7 +34,7 @@ class HomeView extends StatelessWidget {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       if (index == state.files.length) {
-                        return const PlusWdget();
+                        return const PlusWidget();
                       } else {
                         return FileIcon(
                           fileModel: state.files[index],

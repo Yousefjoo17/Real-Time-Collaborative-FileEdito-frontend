@@ -1,8 +1,10 @@
+import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/services/fileService.dart';
 import 'package:flutter/material.dart';
 
 class RenameButton extends StatefulWidget {
-  const RenameButton({Key? key}) : super(key: key);
-
+  const RenameButton({Key? key, required this.fileModel}) : super(key: key);
+  final FileModel fileModel;
   @override
   RenameButtonState createState() => RenameButtonState();
 }
@@ -10,6 +12,7 @@ class RenameButton extends StatefulWidget {
 class RenameButtonState extends State<RenameButton> {
   bool isButtonVisible = true;
   late TextEditingController textController;
+  String newName = "";
 
   @override
   void initState() {
@@ -56,15 +59,19 @@ class RenameButtonState extends State<RenameButton> {
                     border: OutlineInputBorder(),
                   ),
                   onChanged: (value) {
-                    // Handle text changes
+                    newName = value;
                   },
                 ),
               ),
               const Spacer(),
-              const Icon(
-                Icons.done,
-                size: 32,
-              ),
+              IconButton(
+                onPressed: () async {
+                  await FileService()
+                      .renameFile(widget.fileModel.fileID!, newName);
+                  widget.fileModel.fileName = newName;
+                },
+                icon: const Icon(Icons.done),
+              )
             ],
           );
   }
