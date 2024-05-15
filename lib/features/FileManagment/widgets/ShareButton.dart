@@ -1,10 +1,25 @@
+import 'package:fileeditor/core/helpers/CustomShowSnackBar.dart';
+import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/models/UserFilePermission.dart';
+import 'package:fileeditor/core/models/UserModel.dart';
+import 'package:fileeditor/core/services/UserFilePermissionService.dart';
+import 'package:fileeditor/core/services/userService.dart';
 import 'package:flutter/material.dart';
 
-class ShareButton extends StatelessWidget {
+class ShareButton extends StatefulWidget {
   const ShareButton({
     super.key,
+    required this.fileModel,
   });
+  final FileModel fileModel;
 
+  @override
+  State<ShareButton> createState() => _ShareButtonState();
+}
+
+class _ShareButtonState extends State<ShareButton> {
+  String userName = "";
+  int permission = 0;
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -29,7 +44,9 @@ class ShareButton extends StatelessWidget {
                     width: 90,
                     height: 30,
                     child: TextField(
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        userName = value;
+                      },
                       decoration: const InputDecoration(
                         hintText: "name",
                       ),
@@ -38,23 +55,55 @@ class ShareButton extends StatelessWidget {
                   Column(
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          permission = 0;
+                        },
                         child: const Text("Owner"),
                       ),
                       const SizedBox(height: 12),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          permission = 1;
+                        },
                         child: const Text("Editor"),
                       ),
                       const SizedBox(height: 12),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          permission = 2;
+                        },
                         child: const Text("Viewer"),
                       ),
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      UserModel userModel = UserModel(username: userName);
+
+                      List<UserModel> users = await UserService().getAllUsers();
+
+                      bool NameISfound =
+                          UserService().isUsernameExists(users, userModel);
+
+                      int? userid =
+                          UserService().getUserIDbyName(users, userName);
+
+                      UserFilePermission userFilePermission =
+                          UserFilePermission(
+                        fileId: widget.fileModel.fileID,
+                        userId: userid,
+                        permisson: permission,
+                      );
+
+                      if (NameISfound) {
+                        await UserFilePermissionService()
+                            .createUserFilePermission(userFilePermission);
+                        showmySnackBar(
+                            context, "permission was given successfully");
+                      } else {
+                        showmySnackBar(context, "User is not found");
+                      }
+                    },
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.purple)),

@@ -15,7 +15,7 @@ class FileActionsRow extends StatelessWidget {
           "5/5/2024",
           style: TextStyle(fontSize: 18),
         ),
-        const ShareButton(),
+        ShareButton(fileModel: fileModel),
         OtherOptionsButton(fileModel: fileModel),
       ],
     );

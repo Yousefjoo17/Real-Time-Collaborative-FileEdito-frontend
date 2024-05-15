@@ -55,4 +55,13 @@ class UserService {
     }
     return 0;
   }
+
+  int? getUserIDbyName(List<UserModel> users, String userName) {
+    for (var u in users) {
+      if (u.username == userName) {
+        return u.userID ?? 0;
+      }
+    }
+    return 0;
+  }
 }
