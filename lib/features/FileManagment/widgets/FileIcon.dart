@@ -1,7 +1,9 @@
 import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/services/UserFilePermissionService.dart';
 import 'package:fileeditor/core/services/fileService.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileActionsRow.dart';
+import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,6 +17,8 @@ class FileIcon extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         await FileService().openFile(fileModel.fileID!);
+        userfilesPermissions = await UserFilePermissionService()
+            .getAllPermissions(currUserModel.userID!);
         GoRouter.of(context).push(AppRouter.kfileView, extra: fileModel);
       },
       child: Stack(

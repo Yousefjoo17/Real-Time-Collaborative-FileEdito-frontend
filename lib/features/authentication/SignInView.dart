@@ -1,3 +1,4 @@
+import 'package:fileeditor/core/services/UserFilePermissionService.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/core/helpers/CustomShowSnackBar.dart';
 import 'package:fileeditor/core/models/UserModel.dart';
@@ -78,7 +79,12 @@ class _SignInViewState extends State<SignInView> {
                               currUserModel = userModel;
                               currUserModel.userID =
                                   UserService().getCurrUserID(users, userModel);
-                              showmySnackBar(context, "welcome");
+
+                              userfilesPermissions =
+                                  await UserFilePermissionService()
+                                      .getAllPermissions(userModel.userID!);
+
+
                               GoRouter.of(context).push(AppRouter.khomeView);
                               setState(() {
                                 isLoading = false;

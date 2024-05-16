@@ -1,9 +1,12 @@
+import 'package:fileeditor/core/models/UserFilePermission.dart';
 import 'package:fileeditor/core/models/UserModel.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:flutter/material.dart';
 
 late UserModel currUserModel;
-void main() {
+List<UserFilePermission> userfilesPermissions = [];
+void main() async {
+  
   runApp(const MyApp());
 }
 

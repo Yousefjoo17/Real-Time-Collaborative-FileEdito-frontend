@@ -1,14 +1,16 @@
 import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/services/UserFilePermissionService.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/core/utils/AssetsData.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileEditingWidget.dart';
+import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class FileView extends StatefulWidget {
   const FileView({super.key, required this.fileModel});
 
- final FileModel fileModel;
+  final FileModel fileModel;
   @override
   State<FileView> createState() => _FileViewState();
 }
@@ -51,7 +53,9 @@ class _FileViewState extends State<FileView> {
                   ),
                   const Spacer(),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      userfilesPermissions = await UserFilePermissionService()
+                          .getAllPermissions(currUserModel.userID!);
                       GoRouter.of(context).pop();
                       GoRouter.of(context).pop();
                       GoRouter.of(context).push(AppRouter.khomeView);

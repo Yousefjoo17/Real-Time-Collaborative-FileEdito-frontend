@@ -85,7 +85,7 @@ class _SignUpViewState extends State<SignUpView> {
                               currUserModel.userID = users.length + 1;
                               showmySnackBar(context,
                                   "regsiterd successdully ${userModel.username}");
-                              GoRouter.of(context).push(AppRouter.khomeView);
+                              GoRouter.of(context).push(AppRouter.ksigninView);
                               setState(() {
                                 isLoading = false;
                               });

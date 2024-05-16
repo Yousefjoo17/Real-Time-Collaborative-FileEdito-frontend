@@ -8,14 +8,14 @@ class UserFilePermission {
     this.id,
     this.fileId,
     this.userId,
-    this.permisson,
+    this.permisson, //0 owner 1 Editor 2 viewer
   });
 
   factory UserFilePermission.fromJson(json) {
     return UserFilePermission(
       id: json["id"],
-      fileId: json["fileid"],
-      userId: json["userid"],
+      fileId: json["fileId"],
+      userId: json["userId"],
       permisson: json["permission"],
     );
   }
