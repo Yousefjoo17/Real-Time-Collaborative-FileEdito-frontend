@@ -1,4 +1,5 @@
 import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/services/UserFilePermissionService.dart';
 import 'package:fileeditor/core/services/fileService.dart';
 import 'package:fileeditor/features/FileManagment/methods/FindDiff.dart';
 import 'package:fileeditor/main.dart';
@@ -45,6 +46,8 @@ class _FileEditingWidgetState extends State<FileEditingWidget> {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      readOnly: UserFilePermissionService()
+          .isViewer(widget.fileModel.fileID!, currUserModel.userID!),
       style: TextStyle(
         color: Colors.black,
         fontWeight: widget.isBold ? FontWeight.bold : null,
@@ -58,7 +61,8 @@ class _FileEditingWidgetState extends State<FileEditingWidget> {
           String diff =
               findDifference(shortText: lastText, longText: currentText);
           int pos = cursorPosition - diff.length;
-          FileService().runUser(widget.fileModel.fileID!,currUserModel.userID!, diff, pos);
+          FileService().runUser(
+              widget.fileModel.fileID!, currUserModel.userID!, diff, pos);
           print("inserted $diff position $pos");
         } else {
           // I deleted letter
