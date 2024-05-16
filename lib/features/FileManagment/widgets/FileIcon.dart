@@ -1,10 +1,14 @@
 import 'package:fileeditor/core/models/FileModel.dart';
+import 'package:fileeditor/core/models/UpdatedFileModel.dart';
 import 'package:fileeditor/core/services/UserFilePermissionService.dart';
 import 'package:fileeditor/core/services/fileService.dart';
+import 'package:fileeditor/core/services/updatedFileService.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
+import 'package:fileeditor/features/FileManagment/UpadatedSatetCubit/updateedstates_cubit.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileActionsRow.dart';
 import 'package:fileeditor/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class FileIcon extends StatelessWidget {
@@ -19,6 +23,10 @@ class FileIcon extends StatelessWidget {
         await FileService().openFile(fileModel.fileID!);
         userfilesPermissions = await UserFilePermissionService()
             .getAllPermissions(currUserModel.userID!);
+        await context.read<UpdateedstatesCubit>().updateFileState();
+        UpdatedFileModel updatedFileModel = UpdatedFileModel();
+        updatedFileModel.content = fileModel.content;
+        await UpdatedFileService().doUpdate(updatedFileModel);
         GoRouter.of(context).push(AppRouter.kfileView, extra: fileModel);
       },
       child: Stack(

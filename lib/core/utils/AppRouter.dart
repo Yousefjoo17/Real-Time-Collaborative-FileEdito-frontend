@@ -1,7 +1,7 @@
 import 'package:fileeditor/core/models/FileModel.dart';
 import 'package:fileeditor/features/FileManagment/FileView.dart';
 import 'package:fileeditor/features/FileManagment/HomeView.dart';
-import 'package:fileeditor/features/FileManagment/cubit/files_management_cubit.dart';
+import 'package:fileeditor/features/FileManagment/ListFilesCubit/files_management_cubit.dart';
 import 'package:fileeditor/features/authentication/SignInView.dart';
 import 'package:fileeditor/features/authentication/SignUpView.dart';
 import 'package:go_router/go_router.dart';
@@ -33,11 +33,12 @@ abstract class AppRouter {
             FileView(fileModel: state.extra as FileModel),
       ),
       GoRoute(
-          path: khomeView,
-          builder: (context, state) => BlocProvider(
-                create: (context) => FilesManagementCubit()..getAllFiles(),
-                child: const HomeView(),
-              )),
+        path: khomeView,
+        builder: (context, state) => BlocProvider(
+          create: (context) => FilesManagementCubit()..getAllFiles(),
+          child: const HomeView(),
+        ),
+      ),
     ],
   );
 }

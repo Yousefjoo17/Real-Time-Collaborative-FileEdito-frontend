@@ -2,7 +2,7 @@ import 'package:fileeditor/core/services/UserFilePermissionService.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/core/widgets/Custom_Loading_indicator.dart';
 import 'package:fileeditor/core/widgets/Custom_Error_widget.dart';
-import 'package:fileeditor/features/FileManagment/cubit/files_management_cubit.dart';
+import 'package:fileeditor/features/FileManagment/ListFilesCubit/files_management_cubit.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileIcon.dart';
 import 'package:fileeditor/features/FileManagment/widgets/PlusWidget.dart';
 import 'package:fileeditor/main.dart';
