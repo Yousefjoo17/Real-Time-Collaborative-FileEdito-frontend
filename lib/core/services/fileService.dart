@@ -79,4 +79,13 @@ class FileService {
       throw Exception("Error: $e");
     }
   }
+
+  Future<void> updateFileContent(int fileID, String newCont) async {
+    try {
+      await dio.put(
+          "http://localhost:8080/Real-Time-Collaborative-Editing/files/id=$fileID&newContent=$newCont");
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
 }

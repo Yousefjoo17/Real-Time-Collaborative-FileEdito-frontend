@@ -55,6 +55,7 @@ class _FileEditingWidgetState extends State<FileEditingWidget> {
       ),
       onChanged: (value) async {
         currentText = value;
+        newContent = value;
         widget.fileModel.content = value;
         if (currentText.length > lastText.length) {
           //I inserted letters

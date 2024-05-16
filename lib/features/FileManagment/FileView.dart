@@ -1,5 +1,6 @@
 import 'package:fileeditor/core/models/FileModel.dart';
 import 'package:fileeditor/core/services/UserFilePermissionService.dart';
+import 'package:fileeditor/core/services/fileService.dart';
 import 'package:fileeditor/core/utils/AppRouter.dart';
 import 'package:fileeditor/core/utils/AssetsData.dart';
 import 'package:fileeditor/features/FileManagment/widgets/FileEditingWidget.dart';
@@ -56,6 +57,8 @@ class _FileViewState extends State<FileView> {
                     onPressed: () async {
                       userfilesPermissions = await UserFilePermissionService()
                           .getAllPermissions(currUserModel.userID!);
+                      await FileService().updateFileContent(
+                          widget.fileModel.fileID!, newContent);
                       GoRouter.of(context).pop();
                       GoRouter.of(context).pop();
                       GoRouter.of(context).push(AppRouter.khomeView);

@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 late UserModel currUserModel;
 List<UserFilePermission> userfilesPermissions = [];
+String newContent = "";
 void main() async {
-  
   runApp(const MyApp());
 }
 
